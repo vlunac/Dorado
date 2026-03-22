@@ -28,7 +28,7 @@ export default function InvestorDashboard() {
     <div className="page-container">
       <div className="fade-up" style={{ marginBottom: 19 }}>
         <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 45, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>
-          Good morning, <strong style={{ color: "var(--color-goldfish)" }}>{user.name.split(" ")[0]} </strong>!
+          Good morning, <strong style={{ color: "var(--color-goldfish)" }}>{user.name.split(" ")[0]}</strong>!
         </h1>
         <p style={{fontFamily: "var(--text-secondary)", color: "var(--text-secondary)", fontSize: 18 }}>
           You have <strong style={{ color: "var(--color-goldfish)" }}>{matches.length} startup matches</strong> waiting for your review.
