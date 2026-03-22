@@ -16,20 +16,20 @@ export default function FounderDashboard() {
   const [chatTarget, setChatTarget] = useState(null);
   useEffect(() => { getAllInvestors().then(r => { setInvestors(r); setLoading(false); }); }, []);
 
-  const metrics = [
-    { label: "Investor Matches", value: investors.length||"—", icon: <Users size={20} strokeWidth={2.5}/> },
-    { label: "Profile Views",    value: "142",                  icon: <Eye size={20} strokeWidth={2.5}/> },
-    { label: "Meetings Booked",  value: "4",                    icon: <CalendarDays size={20} strokeWidth={2.5}/> },
-    { label: "Capital Target",   value: "$8M",                  icon: <TrendingUp size={20} strokeWidth={2.5}/> },
-  ];
+  // const metrics = [
+  //   { label: "Investor Matches", value: investors.length||"—", icon: <Users size={20} strokeWidth={2.5}/> },
+  //   { label: "Profile Views",    value: "142",                  icon: <Eye size={20} strokeWidth={2.5}/> },
+  //   { label: "Meetings Booked",  value: "4",                    icon: <CalendarDays size={20} strokeWidth={2.5}/> },
+  //   { label: "Capital Target",   value: "$8M",                  icon: <TrendingUp size={20} strokeWidth={2.5}/> },
+  // ];
 
   return (
     <div className="page-container">
-      <div className="fade-up" style={{ marginBottom: 32 }}>
-        <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 26, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>Welcome back, {user.name.split(" ")[0]}!</h1>
-        <p style={{ color: "var(--text-secondary)", fontSize: 14 }}><strong style={{ color: "var(--color-goldfish)" }}>{investors.length} investors</strong> match your startup profile.</p>
+      <div className="fade-up" style={{ marginBottom: 19 }}>
+        <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 45, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>Welcome back, <strong style={{ color: "var(--color-goldfish)" }}>{user.name.split(" ")[0]}</strong>!</h1>
+        <p style={{ color: "var(--text-secondary)", fontSize: 18 }}><strong style={{ color: "var(--color-goldfish)" }}>{investors.length} investors</strong> match your startup profile.</p>
       </div>
-      <div className="fade-up d1" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 32 }}>
+      {/* <div className="fade-up d1" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 32 }}>
         {metrics.map(m => (
           <div key={m.label} className="card" style={{ overflow: "hidden" }}>
             <div className="card-stripe" />
@@ -42,12 +42,12 @@ export default function FounderDashboard() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 24 }}>
         <div className="fade-up d2">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 18, fontWeight: 700, color: "var(--text-primary)" }}>Recommended Investors</h2>
-            <button onClick={() => navigate("/search")} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 13, color: "var(--color-goldfish)", fontFamily: "var(--font-heading)", fontWeight: 700 }}>Browse All <ArrowRight size={14} strokeWidth={2.5}/></button>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 25, fontWeight: 700, color: "var(--text-primary)" }}>Recommended Investors</h2>
+            <button onClick={() => navigate("/search")} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 15, color: "var(--color-goldfish)", fontFamily: "var(--font-heading)", fontWeight: 700 }}>Browse All <ArrowRight size={14} strokeWidth={2.5}/></button>
           </div>
           {loading ? <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>{[1,2,3,4].map(i=><div key={i} className="card skeleton" style={{height:180}}/>)}</div>
             : <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>{investors.slice(0,4).map(inv=><InvestorCard key={inv.id} investor={inv} onChat={setChatTarget}/>)}</div>}

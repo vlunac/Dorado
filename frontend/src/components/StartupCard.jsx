@@ -8,6 +8,7 @@ export default function StartupCard({ startup, onOpen }) {
   const [summary, setSummary] = useState(startup.aiSummary || null);
   const [loading, setLoading] = useState(false);
 
+  
   async function handleSummary(e) {
     e.stopPropagation();
     if (summary) return;
@@ -54,7 +55,7 @@ export default function StartupCard({ startup, onOpen }) {
           <span className={`tag ${stageCssClass(startup.stage)}`}>{startup.stage}</span>
           <span className="tag tag-sage">{startup.industry}</span>
           <span className="tag tag-cream">
-            <MapPin size={9} style={{ marginRight: 2 }} />{startup.location}
+            <MapPin size={15} style={{ marginRight: 2 }} />{startup.location}
           </span>
         </div>
 

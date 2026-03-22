@@ -17,12 +17,12 @@ export default function InvestorDashboard() {
 
   useEffect(() => { getRecommended("investor", user.id).then(r => { setMatches(r); setLoading(false); }); }, [user.id]);
 
-  const metrics = [
-    { label: "Meetings This Week",  value: "3",  icon: <CalendarDays size={20} strokeWidth={2.5}/> },
-    { label: "Deals Reviewed",      value: "28", icon: <FileText size={20} strokeWidth={2.5}/> },
-    { label: "Meetings Booked",     value: "9",  icon: <CalendarCheck size={20} strokeWidth={2.5}/> },
-    { label: "Portfolio Companies", value: "24", icon: <Briefcase size={20} strokeWidth={2.5}/> },
-  ];
+  // const metrics = [
+  //   { label: "Meetings This Week",  value: "3",  icon: <CalendarDays size={20} strokeWidth={2.5}/> },
+  //   { label: "Deals Reviewed",      value: "28", icon: <FileText size={20} strokeWidth={2.5}/> },
+  //   { label: "Meetings Booked",     value: "9",  icon: <CalendarCheck size={20} strokeWidth={2.5}/> },
+  //   { label: "Portfolio Companies", value: "24", icon: <Briefcase size={20} strokeWidth={2.5}/> },
+  // ];
 
   return (
     <div className="page-container">
@@ -30,13 +30,13 @@ export default function InvestorDashboard() {
         <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 45, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>
           Good morning, <strong style={{ color: "var(--color-goldfish)" }}>{user.name.split(" ")[0]} </strong>!
         </h1>
-        <p style={{fontFamily: "var(--font-heading)", color: "var(--text-secondary)", fontSize: 18 }}>
+        <p style={{fontFamily: "var(--text-secondary)", color: "var(--text-secondary)", fontSize: 18 }}>
           You have <strong style={{ color: "var(--color-goldfish)" }}>{matches.length} startup matches</strong> waiting for your review.
         </p>
       </div>
 
       {/* Metric Cards */}
-      <div className="fade-up d1" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 32 }}>
+      {/* <div className="fade-up d1" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: 32 }}>
         {metrics.map(m => (
           <div key={m.label} className="card" style={{ padding: "20px 22px" }}>
             <div className="card-stripe" />
@@ -49,14 +49,14 @@ export default function InvestorDashboard() {
             </div>
           </div>
         ))}
-      </div>
+      </div> */}
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 320px", gap: 24 }}>
         {/* Matches */}
         <div className="fade-up d2">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
             <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 25, fontWeight: 700, color: "var(--text-primary)" }}>Recommended for You</h2>
-            <button onClick={() => navigate("/search")} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 20, color: "var(--color-goldfish)", fontFamily: "var(--font-heading)", fontWeight: 700 }}>View All <ArrowRight size={14} strokeWidth={2.5}/></button>
+            <button onClick={() => navigate("/search")} style={{ display: "flex", alignItems: "center", gap: 5, fontSize: 15, color: "var(--color-goldfish)", fontFamily: "var(--font-heading)", fontWeight: 700 }}>View All <ArrowRight size={14} strokeWidth={2.5}/></button>
           </div>
           {loading ? (
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -81,15 +81,15 @@ export default function InvestorDashboard() {
             <div className="card-stripe" />
             <div style={{ padding: "18px 20px" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 15, color: "var(--text-primary)" }}>Upcoming Meetings</h3>
+                <h3 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 20, color: "var(--text-primary)" }}>Upcoming Meetings</h3>
                 <CalendarDays size={16} strokeWidth={2.5} color="var(--color-goldfish)"/>
               </div>
               {mockMeetings.map((m,i) => (
                 <div key={m.id} style={{ display: "flex", gap: 12, alignItems: "center", padding: "10px 0", borderBottom: i<mockMeetings.length-1 ? "1px solid var(--border-color)":"none" }}>
-                  <div style={{ background: "var(--color-goldfish)", color: "#fff", borderRadius: 10, padding: "6px 10px", textAlign: "center", fontSize: 11, fontFamily: "var(--font-heading)", fontWeight: 700, lineHeight: 1.3, flexShrink: 0 }}>{m.date.split(",")[0]}</div>
+                  <div style={{ background: "var(--color-goldfish)", color: "#fff", borderRadius: 10, padding: "6px 10px", textAlign: "center", fontSize: 15, fontFamily: "var(--font-heading)", fontWeight: 700, lineHeight: 1.3, flexShrink: 0 }}>{m.date.split(",")[0]}</div>
                   <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontFamily: "var(--font-heading)", fontSize: 13, fontWeight: 700, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.counterpartName}</div>
-                    <div style={{ fontSize: 11.5, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: 4 }}><Clock size={10} strokeWidth={2.5}/> {m.time} · {m.type}</div>
+                    <div style={{ fontFamily: "var(--font-heading)", fontSize: 15, fontWeight: 700, marginBottom: 2, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{m.counterpartName}</div>
+                    <div style={{ fontSize: 12, color: "var(--text-secondary)", display: "flex", alignItems: "center", gap: 4 }}><Clock size={15} strokeWidth={2.5}/> {m.time} · {m.type}</div>
                   </div>
                   <button className="btn btn-sage-outline" style={{ fontSize: 11, padding: "4px 12px" }}>Join</button>
                 </div>
