@@ -1,8 +1,12 @@
 """FastAPI application entry point."""
 
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.database import create_indexes, get_database
+from app.seed import seed_if_empty
 from app.routers import (
     dashboard,
     founders,
@@ -14,7 +18,15 @@ from app.routers import (
     summaries,
 )
 
-app = FastAPI(title="StartMatch API", version="0.1.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await create_indexes()
+    await seed_if_empty(get_database())
+    yield
+
+
+app = FastAPI(title="StartMatch API", version="0.1.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
