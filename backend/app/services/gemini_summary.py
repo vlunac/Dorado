@@ -1,7 +1,13 @@
-"""Google Gemini summary generation service."""
+"""Google Gemini summary generation service with DB caching."""
+
+import hashlib
+from datetime import datetime, timezone
 
 import google.generativeai as genai
+from motor.motor_asyncio import AsyncIOMotorDatabase
+
 from app.core.config import GEMINI_API_KEY
+from app.repositories import summary_repo
 
 SUMMARY_PROMPT = (
     "Summarize the following startup description in 2-3 concise sentences "
@@ -11,8 +17,7 @@ SUMMARY_PROMPT = (
 )
 
 _FALLBACK_SUMMARY = (
-    "AI-generated summary unavailable. Please review the full startup "
-    "description for details."
+    "Summary unavailable \u2014 not enough data from the startup."
 )
 
 
@@ -24,34 +29,62 @@ def _configure_client() -> bool:
     return True
 
 
-async def generate_summary(startup_id: str, description: str) -> dict:
-    """Generate an AI summary for a startup description.
+def _hash_description(description: str) -> str:
+    """Produce a short hash to detect description changes."""
+    return hashlib.sha256(description.encode()).hexdigest()[:16]
 
-    Uses the Gemini API if a key is configured, otherwise returns a fallback.
+
+async def generate_summary(
+    db: AsyncIOMotorDatabase,
+    startup_id: str,
+    description: str,
+) -> dict:
+    """Generate an AI summary, using cached version when available.
+
+    Cache is invalidated when the startup description hash changes.
     """
-    has_key = _configure_client()
+    desc_hash = _hash_description(description)
 
-    if not has_key:
+    # Check cache
+    cached = await summary_repo.find_by_startup_id(db, startup_id)
+    if cached and cached.get("startup_description_hash") == desc_hash:
         return {
             "startup_id": startup_id,
-            "summary": _FALLBACK_SUMMARY,
-            "generated_at": _now_iso(),
-            "model": "fallback",
+            "summary": cached["summary"],
+            "generated_at": cached["generated_at"],
+            "model": cached["model"],
         }
 
-    prompt = SUMMARY_PROMPT.format(description=description)
+    # Generate fresh summary
+    has_key = _configure_client()
+    now = datetime.now(timezone.utc).isoformat()
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
-    response = await model.generate_content_async(prompt)
+    if not has_key:
+        summary_text = _FALLBACK_SUMMARY
+        model_name = "fallback"
+    else:
+        try:
+            prompt = SUMMARY_PROMPT.format(description=description)
+            model = genai.GenerativeModel("gemini-2.0-flash")
+            response = await model.generate_content_async(prompt)
+            summary_text = response.text
+            model_name = "gemini-2.0-flash"
+        except Exception:
+            summary_text = _FALLBACK_SUMMARY
+            model_name = "fallback"
+
+    # Persist to cache
+    await summary_repo.upsert(db, {
+        "startup_id": startup_id,
+        "summary": summary_text,
+        "model": model_name,
+        "startup_description_hash": desc_hash,
+        "generated_at": now,
+    })
 
     return {
         "startup_id": startup_id,
-        "summary": response.text,
-        "generated_at": _now_iso(),
-        "model": "gemini-2.0-flash",
+        "summary": summary_text,
+        "generated_at": now,
+        "model": model_name,
     }
-
-
-def _now_iso() -> str:
-    from datetime import datetime, timezone
-    return datetime.now(timezone.utc).isoformat()
