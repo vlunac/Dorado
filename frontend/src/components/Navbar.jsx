@@ -13,7 +13,7 @@ function GoldfishLogo({ size = 48 }) {
   return (
     <img
       src={goldfishLogo}
-      alt="StartMatch Goldfish Logo"
+      alt="Dorado Logo"
       width={size}
       height={size}
       style={{ animation: "bubbleFloat 1.2s ease-in-out infinite", objectFit: "contain" }}
@@ -37,7 +37,7 @@ export default function Navbar() {
       <div style={{ padding: "24px 20px 16px", borderBottom: "1px solid rgba(141,178,148,0.25)", display: "flex", alignItems: "center", gap: 12 }}>
         <GoldfishLogo size={60} />
         <div>
-          <div style={{ color: "#fff", fontSize: 25, fontFamily: "var(--font-heading)", fontWeight: 700, letterSpacing: "-0.01em", lineHeight: 1.2 }}>StartMatch</div>
+          <div style={{ color: "#fff", fontSize: 25, fontFamily: "var(--font-heading)", fontWeight: 700, letterSpacing: "-0.01em", lineHeight: 1.2 }}>Dorado</div>
         </div>
       </div>
 

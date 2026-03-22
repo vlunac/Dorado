@@ -66,10 +66,10 @@ export default function NetworkPage() {
 
       {!loading && filtered.length === 0 && (
         <div style={{ textAlign: "center", padding: "80px 20px" }}>
-          <div style={{ fontSize: 56, marginBottom: 16 }}>🐟</div>
+
           <h3 style={{ fontFamily: "var(--font-heading)", fontSize: 18, fontWeight: 700, color: "var(--color-moss-dark)", marginBottom: 8 }}>No connections yet.</h3>
           <p style={{ color: "var(--text-secondary)", fontSize: 13, marginBottom: 20 }}>Start by browsing startups and connecting.</p>
-          <a href="/search" className="btn btn-goldfish" style={{ textDecoration: "none" }}>Browse Now 🐟</a>
+          <a href="/search" className="btn btn-goldfish" style={{ textDecoration: "none" }}>Browse Now</a>
         </div>
       )}
 

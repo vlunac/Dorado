@@ -34,7 +34,7 @@ export default function InvestorProfilePage() {
 
   if (!investor) return (
     <div className="page-container" style={{ textAlign: "center", paddingTop: 80 }}>
-      <div style={{ fontSize: 56, marginBottom: 16 }}>🐟</div>
+      <div style={{ fontSize: 56, marginBottom: 16 }}></div>
       <p style={{ fontSize: 16, color: "var(--text-secondary)" }}>Investor not found.</p>
     </div>
   );

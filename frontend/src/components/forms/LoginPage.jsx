@@ -24,10 +24,10 @@ export default function LoginPage() {
       <div className="card" style={{ width:"100%", maxWidth:400, padding:"36px 32px" }}>
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:28, justifyContent:"center" }}>
           <div style={{ width:32,height:32,borderRadius:8,background:"var(--color-teal-dark)",display:"flex",alignItems:"center",justifyContent:"center" }}><Star size={16} color="#fff" fill="#fff"/></div>
-          <span style={{ fontSize:18,fontWeight:800,color:"var(--text-primary)" }}>Start<span style={{color:"var(--accent-coral)"}}>Match</span></span>
+          <span style={{ fontSize:18,fontWeight:800,color:"var(--text-primary)" }}>Dor<span style={{color:"var(--accent-coral)"}}>ado</span></span>
         </div>
         <h2 style={{ fontSize:20,fontWeight:800,marginBottom:6,textAlign:"center" }}>Welcome back</h2>
-        <p style={{ fontSize:13,color:"var(--text-secondary)",textAlign:"center",marginBottom:24 }}>Sign in to your StartMatch account</p>
+        <p style={{ fontSize:13,color:"var(--text-secondary)",textAlign:"center",marginBottom:24 }}>Sign in to your Dorado account</p>
         {err && <div style={{ background:"rgba(229,62,62,0.1)",border:"1px solid rgba(229,62,62,0.3)",borderRadius:8,padding:"10px 14px",fontSize:13,color:"#E53E3E",marginBottom:16 }}>{err}</div>}
         <div className="form-group">
           <label className="form-label">Email</label>

@@ -46,7 +46,7 @@ export default function FounderProfilePage() {
               )}
               {!isOwn && (
                 <button className="btn btn-goldfish" onClick={() => setShowConnect(true)} style={{ fontSize: 12.5 }}>
-                  Connect with Me 🐟
+                  Connect with Me
                 </button>
               )}
               <a href={founder.calendlyUrl} target="_blank" rel="noreferrer" className="btn btn-sage-outline" style={{ fontSize: 12.5, textDecoration: "none" }}>

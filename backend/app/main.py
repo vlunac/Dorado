@@ -26,7 +26,7 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="StartMatch API", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="Dorado API", version="0.1.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -51,4 +51,4 @@ app.include_router(summaries.router, prefix="/api")
 
 @app.get("/")
 async def root():
-    return {"message": "StartMatch API is running"}
+    return {"message": "Dorado API is running"}

@@ -26,7 +26,7 @@ export default function ConnectionModal({ target, onClose }) {
           {sent ? (
             <div style={{ textAlign: "center", padding: "24px 0" }}>
               <CheckCircle size={44} color="var(--color-goldfish)" style={{ marginBottom: 12 }} />
-              <p style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 16, color: "var(--color-goldfish)" }}>Message Sent! 🐟</p>
+              <p style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 16, color: "var(--color-goldfish)" }}>Message Sent!</p>
               <p style={{ fontSize: 13, color: "var(--text-secondary)", marginTop: 6 }}>Your intro request has been delivered.</p>
             </div>
           ) : (
@@ -34,7 +34,7 @@ export default function ConnectionModal({ target, onClose }) {
               <p style={{ fontSize: 13, color: "var(--text-secondary)", marginBottom: 16 }}>Send a connection request to <strong style={{ color: "var(--text-primary)" }}>{name}</strong>.</p>
               <div className="form-group">
                 <label className="form-label">Your Message</label>
-                <textarea className="form-input" rows={5} placeholder={`Hi ${name.split(" ")[0]}, I came across your profile on StartMatch and…`} value={message} onChange={e=>setMessage(e.target.value)} style={{ resize: "vertical", minHeight: 100 }} />
+                <textarea className="form-input" rows={5} placeholder={`Hi ${name.split(" ")[0]}, I came across your profile on Dorado and…`} value={message} onChange={e=>setMessage(e.target.value)} style={{ resize: "vertical", minHeight: 100 }} />
               </div>
               <button className="btn btn-goldfish btn-full" onClick={handleSend} disabled={!message.trim()} style={{ marginTop: 8 }}>
                 <Send size={15} strokeWidth={2.5} /> Send Message

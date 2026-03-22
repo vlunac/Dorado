@@ -34,7 +34,7 @@ export default function PortfolioPage() {
   return (
     <div className="page-container">
       <div className="fade-up" style={{ marginBottom: 24 }}>
-        <h1 className="page-heading">My Portfolio 🐟</h1>
+        <h1 className="page-heading">My Portfolio</h1>
         <p style={{ color: "var(--text-secondary)" }}>Your investment activity and portfolio companies.</p>
       </div>
 
@@ -91,7 +91,7 @@ export default function PortfolioPage() {
         <h2 style={{ fontFamily: "var(--font-heading)", fontSize: 16, fontWeight: 700, marginBottom: 16, color: "var(--text-primary)" }}>Portfolio Companies</h2>
         {portfolio.length === 0 ? (
           <div className="card" style={{ padding: "48px 24px", textAlign: "center" }}>
-            <div style={{ fontSize: 48, marginBottom: 12 }}>🐟</div>
+
             <p style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: 16, color: "var(--color-moss-dark)", marginBottom: 8 }}>No portfolio companies yet!</p>
             <p style={{ color: "var(--text-secondary)", fontSize: 13, marginBottom: 20 }}>Start investing to build your portfolio.</p>
             <button className="btn btn-goldfish" onClick={() => navigate("/search")}>Browse Startups</button>
