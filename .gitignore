@@ -23,13 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-# Environment files
-.env
-.env.*
-!.env.example
-
-# Python
-__pycache__/
-*.py[cod]
-*.egg-info/
+# Python environments
+venv/
 .venv/
+__pycache__/

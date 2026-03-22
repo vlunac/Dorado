@@ -1,16 +1,12 @@
 """Summaries router — generates AI summaries for startups (investor-only)."""
 
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException
 from motor.motor_asyncio import AsyncIOMotorDatabase
 from pydantic import BaseModel
-from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 from app.dependencies import get_db, require_investor
 from app.repositories import startup_repo
 from app.services.gemini_summary import generate_summary
-
-limiter = Limiter(key_func=get_remote_address)
 
 router = APIRouter(prefix="/summaries", tags=["summaries"])
 
@@ -23,9 +19,7 @@ class SummaryResponse(BaseModel):
 
 
 @router.post("/{startup_id}", response_model=SummaryResponse)
-@limiter.limit("10/minute")
 async def create_summary(
-    request: Request,
     startup_id: str,
     role: str = Depends(require_investor),
     db: AsyncIOMotorDatabase = Depends(get_db),

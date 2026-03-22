@@ -1,0 +1,5 @@
+﻿832ae72 new UI
+096d95d feat: Build full backend architecture ΓÇö routers, schemas, repos, services
+04a239e feat: Implement Gemini AI summary generation service and endpoint
+ee05853 chore: track PRD.md
+61a3e3f chore: Align project structure with demo scope

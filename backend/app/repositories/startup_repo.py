@@ -1,6 +1,5 @@
 """Startup repository — MongoDB queries."""
 
-import re
 from datetime import datetime, timezone
 
 from bson import ObjectId
@@ -89,10 +88,10 @@ async def search(
     query: dict = {}
 
     if filters.get("location"):
-        query["location"] = {"$regex": re.escape(filters["location"]), "$options": "i"}
+        query["location"] = {"$regex": filters["location"], "$options": "i"}
 
     if filters.get("industry"):
-        query["industry"] = {"$regex": re.escape(filters["industry"]), "$options": "i"}
+        query["industry"] = {"$regex": filters["industry"], "$options": "i"}
 
     if filters.get("stage"):
         query["stage"] = filters["stage"]

@@ -1,13 +1,7 @@
 """Google Gemini summary generation service with DB caching."""
 
 import hashlib
-import logging
-import re
 from datetime import datetime, timezone
-
-logger = logging.getLogger(__name__)
-
-MAX_DESCRIPTION_LENGTH = 10000
 
 import google.generativeai as genai
 from motor.motor_asyncio import AsyncIOMotorDatabase
@@ -33,22 +27,6 @@ def _configure_client() -> bool:
         return False
     genai.configure(api_key=GEMINI_API_KEY)
     return True
-
-
-def _sanitize_description(description: str) -> str:
-    """Truncate and strip prompt-injection patterns from user-provided text."""
-    text = description[:MAX_DESCRIPTION_LENGTH]
-    # Remove common prompt injection patterns
-    text = re.sub(
-        r"(?i)(ignore\s+(all\s+)?previous\s+instructions|"
-        r"you\s+are\s+now|"
-        r"system\s*prompt|"
-        r"act\s+as\s+if|"
-        r"disregard\s+(all\s+)?prior)",
-        "[filtered]",
-        text,
-    )
-    return text.strip()
 
 
 def _hash_description(description: str) -> str:
@@ -86,14 +64,12 @@ async def generate_summary(
         model_name = "fallback"
     else:
         try:
-            sanitized = _sanitize_description(description)
-            prompt = SUMMARY_PROMPT.format(description=sanitized)
+            prompt = SUMMARY_PROMPT.format(description=description)
             model = genai.GenerativeModel("gemini-2.0-flash")
             response = await model.generate_content_async(prompt)
             summary_text = response.text
             model_name = "gemini-2.0-flash"
         except Exception:
-            logger.exception("Gemini summary generation failed for startup %s", startup_id)
             summary_text = _FALLBACK_SUMMARY
             model_name = "fallback"
 

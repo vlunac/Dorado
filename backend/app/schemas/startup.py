@@ -6,18 +6,18 @@ from pydantic import BaseModel, Field
 
 
 class StartupCreate(BaseModel):
-    name: str = Field(max_length=200)
-    description: str = Field(max_length=10000)
-    industry: str = Field(max_length=100)
-    location: str = Field(max_length=200)
-    stage: str = Field(max_length=50)  # e.g. "pre-seed", "seed", "series-a"
+    name: str
+    description: str
+    industry: str
+    location: str
+    stage: str  # e.g. "pre-seed", "seed", "series-a"
     team_size: int = Field(ge=1)
     total_raised: float = Field(ge=0, default=0)
     current_ask: float = Field(ge=0, default=0)
-    date_founded: str = Field(max_length=50)  # ISO date string
+    date_founded: str  # ISO date string
     founder_id: str
     expenses: float = Field(ge=0, default=0)
-    status: str = Field(default="active", max_length=50)  # active, paused, closed
+    status: str = "active"  # active, paused, closed
 
 
 class StartupRead(BaseModel):
@@ -39,14 +39,14 @@ class StartupRead(BaseModel):
 
 
 class StartupUpdate(BaseModel):
-    name: Optional[str] = Field(default=None, max_length=200)
-    description: Optional[str] = Field(default=None, max_length=10000)
-    industry: Optional[str] = Field(default=None, max_length=100)
-    location: Optional[str] = Field(default=None, max_length=200)
-    stage: Optional[str] = Field(default=None, max_length=50)
+    name: Optional[str] = None
+    description: Optional[str] = None
+    industry: Optional[str] = None
+    location: Optional[str] = None
+    stage: Optional[str] = None
     team_size: Optional[int] = Field(default=None, ge=1)
     total_raised: Optional[float] = Field(default=None, ge=0)
     current_ask: Optional[float] = Field(default=None, ge=0)
-    date_founded: Optional[str] = Field(default=None, max_length=50)
+    date_founded: Optional[str] = None
     expenses: Optional[float] = Field(default=None, ge=0)
-    status: Optional[str] = Field(default=None, max_length=50)
+    status: Optional[str] = None

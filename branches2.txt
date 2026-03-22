@@ -1,0 +1,14 @@
+﻿  DEV
+  QA
+* alexia
+  chore/file-structure
+  feat/backend-data-layer
+  front-end-dev
+  main
+  remotes/origin/DEV
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/alexia
+  remotes/origin/chore/file-structure
+  remotes/origin/feat/backend-data-layer
+  remotes/origin/front-end-dev
+  remotes/origin/main

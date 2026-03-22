@@ -1,15 +1,15 @@
 """Founder entity schemas."""
 
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class FounderCreate(BaseModel):
-    name: str = Field(max_length=200)
-    bio: str = Field(default="", max_length=5000)
-    linkedin_url: str = Field(default="", max_length=500)
-    instagram_url: str = Field(default="", max_length=500)
-    facebook_url: str = Field(default="", max_length=500)
+    name: str
+    bio: str = ""
+    linkedin_url: str = ""
+    instagram_url: str = ""
+    facebook_url: str = ""
     startup_ids: list[str] = []
 
 
@@ -24,9 +24,9 @@ class FounderRead(BaseModel):
 
 
 class FounderUpdate(BaseModel):
-    name: Optional[str] = Field(default=None, max_length=200)
-    bio: Optional[str] = Field(default=None, max_length=5000)
-    linkedin_url: Optional[str] = Field(default=None, max_length=500)
-    instagram_url: Optional[str] = Field(default=None, max_length=500)
-    facebook_url: Optional[str] = Field(default=None, max_length=500)
+    name: Optional[str] = None
+    bio: Optional[str] = None
+    linkedin_url: Optional[str] = None
+    instagram_url: Optional[str] = None
+    facebook_url: Optional[str] = None
     startup_ids: Optional[list[str]] = None

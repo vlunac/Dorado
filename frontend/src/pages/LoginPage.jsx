@@ -31,9 +31,7 @@ export default function LoginPage() {
     <div style={{ minHeight: "100vh", background: "var(--bg-primary)", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
       <div style={{ width: "min(400px, 100%)" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <div style={{ fontSize: 56, marginBottom: 12, animation: "bubbleFloat 1.2s ease-in-out infinite", display: "inline-block" }}>🐟</div>
-          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 24, fontWeight: 700, color: "var(--color-moss-dark)", marginBottom: 4 }}>StartMatch</h1>
-          <p style={{ fontSize: 13, color: "var(--color-goldfish)", fontFamily: "var(--font-heading)", fontWeight: 600 }}>Goldfish Edition</p>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: 24, fontWeight: 700, color: "var(--color-moss-dark)", marginBottom: 4 }}>Dorado</h1>
           <p style={{ fontSize: 13.5, color: "var(--text-secondary)", marginTop: 8 }}>Sign in to your account</p>
         </div>
 
@@ -51,7 +49,7 @@ export default function LoginPage() {
               {errors.password && <span className="form-error">{errors.password}</span>}
             </div>
             <button className="btn btn-goldfish btn-full" onClick={handleSubmit} disabled={loading} style={{ marginTop: 8 }}>
-              {loading ? "Signing in…" : "Sign In 🐟"}
+              {loading ? "Signing in…" : "Sign In"}
             </button>
             <p style={{ textAlign: "center", marginTop: 20, fontSize: 13, color: "var(--text-secondary)" }}>
               Don't have an account?{" "}
